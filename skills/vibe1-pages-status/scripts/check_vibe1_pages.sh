@@ -141,6 +141,16 @@ if [ -n "$PAGES_URL" ]; then
     if [ -n "$LAST_SUCCESS_RUN_ID" ]; then
       echo "Last successful publish: $LAST_SUCCESS_AGE"
     fi
+    echo
+    echo "== Smoke test: index.html =="
+    python3 - <<'PY' "$PAGES_URL"
+import urllib.request, sys
+url = sys.argv[1]
+with urllib.request.urlopen(url, timeout=20) as r:
+    body = r.read(400).decode('utf-8', errors='replace')
+    print(f"status={r.status}")
+    print(body)
+PY
   else
     echo "Pages site exists at: $PAGES_URL"
     echo "But latest workflow conclusion is: ${RUN_CONCLUSION:-unknown}"

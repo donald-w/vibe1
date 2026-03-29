@@ -17,6 +17,7 @@ The script reports:
 - whether the newest run is queued, in progress, succeeded, or failed
 - if failed, the relevant job/log output and the most likely reason
 - GitHub Pages API state, including the live URL and HTTPS/custom-domain state when available
+- a basic smoke test that fetches the live `index.html` after publication is confirmed
 
 ## Decision rule
 
